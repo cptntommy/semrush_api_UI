@@ -53,7 +53,15 @@ st.title('SEMRush Keyword Analysis Tool')
 api_key = st.text_input('Enter your SEMRush API key')
 
 # Input for database selection
-database = st.selectbox('Select the database', ['us', 'uk', 'ca', 'au'])  # Update as per your script's capabilities
+database = st.selectbox('Select the database', ['us', 'uk', 'ca', 'au', 'Other (Specify)'])  # Update as per your script's capabilities
+selected_database = st.selectbox('Select the database', database_options)
+
+# Conditional text input for custom database
+if selected_database == 'Other (Specify)':
+    custom_database = st.text_input('Enter the database name')
+    database = custom_database.lower()  # Convert to lowercase as per your API requirement
+else:
+    database = selected_database.lower()  # Convert to lowercase
 
 # Toggle between CSV upload and manual input
 input_method = st.radio('Select your keyword input method', ('Upload CSV', 'Manual Input'))
