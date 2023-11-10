@@ -55,7 +55,7 @@ api_key = st.text_input('Enter your SEMRush API key')
 # Dropdown for database selection with an option for custom input
 database_options = ['us', 'uk', 'ca', 'au', 'Other (Specify)']
 selected_database = st.selectbox('Select the database', database_options)
-
+st.text('For a full database list, please visit: https://developer.semrush.com/api/v3/analytics/basic-docs/#databases/')
 # Conditional text input for custom database
 if selected_database == 'Other (Specify)':
     custom_database = st.text_input('Enter the database name')
