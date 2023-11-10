@@ -47,7 +47,7 @@ def query_semrush(api_key, database, keywords):
     return pd.DataFrame(results)
 
 # Streamlit app layout
-st.title('SEMRush Keyword Analysis Tool')
+st.title('SEMRush Keyword Search Volume Tool')
 
 # Input for API key
 api_key = st.text_input('Enter your SEMRush API key')
@@ -86,7 +86,7 @@ if st.button('Analyze Keywords'):
             st.write(results.head(10))  # Display only the first 10 rows
             # Add option to download results as CSV
             csv = results.to_csv(index=False)
-            st.download_button('Download Full Results as CSV', csv, 'keywords_analysis.csv', 'text/csv')
+            st.download_button('Download Full Results as CSV', csv, 'semrush_api_keywords.csv', 'text/csv')
         else:
             st.error('Error: ' + results)
     else:
