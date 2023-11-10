@@ -52,8 +52,8 @@ st.title('SEMRush Keyword Analysis Tool')
 # Input for API key
 api_key = st.text_input('Enter your SEMRush API key')
 
-# Input for database selection
-database = st.selectbox('Select the database', ['us', 'uk', 'ca', 'au', 'Other (Specify)'])  # Update as per your script's capabilities
+# Dropdown for database selection with an option for custom input
+database_options = ['us', 'uk', 'ca', 'au', 'Other (Specify)']
 selected_database = st.selectbox('Select the database', database_options)
 
 # Conditional text input for custom database
