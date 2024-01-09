@@ -18,10 +18,9 @@ def make_api_request(api_key, database, keyword):
         response = session.get(url, params=params)
     return response.text.splitlines()
 
-
 def query_semrush(api_key, database, keywords):
     results = []
-    progress_bar = st.progress(0)  # Initialize the progress bar
+    progress_bar = st.progress(0) #initialise progress bar
     total_keywords = len(keywords)
 
     with ThreadPoolExecutor() as executor:
@@ -29,21 +28,22 @@ def query_semrush(api_key, database, keywords):
         for i, future in enumerate(concurrent.futures.as_completed(futures), start=1):
             keyword = futures[future]
             lines = future.result()
-            print(f"API Response for {keyword}: {lines}")  # Debug print
+            print(f"API Response for {keyword}: {lines}") #debug print
             data = csv.DictReader(lines, delimiter=";")
             for row in data:
                 try:
                     search_volume = row["Search Volume"]
+                    cpc = row["CPC"]  # Extract CPC data
                     date1 = row["Date"]
                     results.append(
-                        {"Date": date1, "Database": database, "Keyword": keyword, "Search Volume": search_volume})
+                        {"Date": date1, "Database": database, "Keyword": keyword, "Search Volume": search_volume, "CPC": cpc})
                 except KeyError as e:
-                    print(f"KeyError for {keyword}: {e}")  # Debug print
+                    print(f"KeyError for {keyword}: {e}") #debug print
                     continue
-            progress_bar.progress(i / total_keywords)  # Update the progress bar
+            progress_bar.progress(i / total_keywords) #update progress bar
 
-    progress_bar.empty()  # Optionally, hide the progress bar after completion
-    print(f"Final Results: {results}")  # Debug print
+    progress_bar.empty() #hide progress bar after completion
+    print(f"Final Results: {results}")#debug print
     return pd.DataFrame(results)
 
 # Streamlit app layout
