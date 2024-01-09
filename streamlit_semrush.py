@@ -52,6 +52,9 @@ st.title('SEMRush Keyword Search Volume Tool')
 # Input for API key
 api_key = st.text_input('Enter your SEMRush API key')
 
+# Checkbox to include CPC data
+include_cpc = st.checkbox('Include CPC Data')
+
 # Dropdown for database selection with an option for custom input
 database_options = ['us', 'uk', 'ca', 'au', 'Other (Specify)']
 selected_database = st.selectbox('Select the database', database_options)
